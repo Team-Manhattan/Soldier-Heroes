@@ -52,3 +52,64 @@ body header#logged-user-info div {
     float: right;
     display: block;
 }
+
+body main#shop table tbody tr td:last-of-type {
+    border-right: 1px solid #008000;
+}
+
+body main#shop table tbody tr:last-of-type td {
+    border-bottom: 1px solid #008000;
+}
+
+body main#shop table tbody tr td:first-of-type {
+    border-left: 1px solid #008000;
+}
+
+body main#shop table thead th {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #008000;
+    text-align: center;
+    font-weight: bold;
+    color: #f0f8ff;
+    padding: 10px;
+}
+
+body main#shop table tr td {
+    padding: 5px;
+}
+
+body main#shop table tr td img {
+    width: 70px;
+    height: 80px;
+    border: 3px solid rgba(0, 0, 0, 0);
+}
+
+body main#shop table tr td img:hover {
+    border: 3px solid rgba(15, 195, 55, 1);
+    border-radius: 5px;
+}
+
+body main#shop table tr td.locked img:hover {
+    border: 3px solid rgba(252, 18, 55, 1);
+}
+
+body main#shop table tr td div.soldier-info {
+    display: block;
+    position: absolute;
+    margin-left: 80px;
+    margin-top: -90px;
+}
+
+body main#shop table tr td div.soldier-info table {
+    background-color: rgba(100, 100, 100, 0.7);
+    color: white;
+}
+
+body main#shop table tr td div.soldier-info table tr td {
+    border: none;
+}
+
+body main#shop table tr td div.hide {
+    display: none;
+}

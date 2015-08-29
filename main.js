@@ -2,6 +2,7 @@ import $ from 'jquery';
 import logFunc from  'Modules/loggingForm.js';
 import info from 'Modules/loadUserInfo.js';
 import factoryPlayer from 'Libraries/player.js';
+import shop from 'Modules/shop.js';
 
 let storage = window.localStorage;
 
@@ -10,8 +11,9 @@ localStore should be empty and login form must appear, else show data from last 
 
 if (storage.getItem('loggedUser') !== null) {
     /*load module2 - shop*/
-    let player = factoryPlayer.getPlayer().createPlayer('PeshoBirata89', 'PEepi89YYY', 1, 1, 250, new Date(2013, 3, 23), []);
+    let player = factoryPlayer.getPlayer().createPlayer('PeshoBirata89', 'PEepi89YYY', 2, 1, 250, new Date(2013, 3, 23), []);
     info.showLoggedUserInfo(player);
+    shop.loadShop(player);
     /**
      * let idOfLoggedUser = storage.getItem('loggedUser');
      * let user = getRequestFromDBByID(idOfLoggedUser);*/
