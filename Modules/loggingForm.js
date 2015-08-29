@@ -1,5 +1,7 @@
 import $ from 'jquery';
-import player from './player.js';
+import player from '../Libraries/player.js';
+import info from './loadUserInfo.js';
+
 
 function log() {
     "use strict";
@@ -8,8 +10,6 @@ function log() {
 
     let width = window.innerWidth - 0;
     let height = window.innerHeight - 0;
-    console.log(width);
-    console.log(height);
     let $div = $('<div/>');
     $div.attr('id', 'login-form');
 
@@ -20,7 +20,8 @@ function log() {
     $('<input type="password"/>').attr('id', 'password').appendTo($div);
     $('<input type="button" id="login" style="display: block" value="Sign in"/>').appendTo($div);
     $('<input type="button" id="register" style="display: none" value="Register" />').appendTo($div);
-    $('<a  href="#" id="forReg" />').html('Don\'t have an account? Register.').appendTo($div);
+    $('<a  href="#" id="forReg"/>').html('Don\'t have an account? Register.').appendTo($div);
+    $('<a  href="#" id="return-login" style="display: none"  />').html('Already registered?').appendTo($div);
     $div.attr('style', 'left: ' + ((width / 2) - 120) + 'px; top: ' + ((height / 2) - 75) + 'px;');
     $div.appendTo('body');
 
@@ -28,22 +29,30 @@ function log() {
         /*TODO:CHECK IN users db for existence of this user*/
         /*TODO:CHECK if the password matches*/
         /*TODO:Create object "player" with properties form gb data: money, exp, level, army etc.*/
-        /*TODO:save id of the user in "localStarage" - it is special number four different digits*/
+        /*TODO:save id of the user in "localStarage" - it is special number six different digits*/
         /*TODO:Then Load on the shop menu*/
     });
 
     $('#forReg').on('click', function () {
         $(this).css('display', 'none');
+        $('#return-login').css('display','inline');
         $('#login').css('display', 'none');
         $('#register').css('display', 'block');
         $('div#login-form h3').html('Registration');
+    });
+
+    $('#return-login').on('click' ,function() {
+        $(this).css('display', 'none');
+        $('#forReg').css('display','inline');
+        $('#login').css('display', 'block');
+        $('#register').css('display', 'none');
+        $('div#login-form h3').html('Login');
     });
 
     $('#register').on('click', function () {
         let username = $('#username').val();
         let password = $('#password').val();
 
-        /*Todo: Show signed as player.username*/
 
         if (/\s+/.test(username) || /\s+/.test(password) || username === '' || password === '') {
             return;
@@ -52,16 +61,13 @@ function log() {
         }
 
         /*register new player in mongodb*/
-        let mod = player.bigPlayer();
-        let pla = mod.getPlayer(username, password, 1, 1, 100, new Date(), []);
-        window.localStorage.setItem(pla.namePl, pla.id);
-
-        // this must be in second module
-        $('#login-form').remove();
-        $('<header />').html(`Signed as ${username}!`).appendTo('body');
+        let mod = player.getPlayer();
+        let pla = mod.createPlayer(username, password, 1, 1, 100, new Date(), []);
+        window.localStorage.setItem('loggedUser', pla.id);
+        info.showLoggedUserInfo(pla);
     });
 }
 
 export default {
-    log: log
+    log
 }

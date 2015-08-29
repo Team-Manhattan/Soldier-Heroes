@@ -45,3 +45,8 @@ body header {
     padding: 10px;
     text-align: right;
 }
+
+body #logged-user-info {
+    float: right;
+    display: block;
+}

@@ -12,7 +12,7 @@ function generateId() {
     return id;
 }
 
-function bigPlayer() {
+function getPlayer() {
     "use strict";
 
     let myModule = (function () {
@@ -132,7 +132,7 @@ function bigPlayer() {
             return player;
         }());
         return {
-            getPlayer: function (name, pass,level, exp, money,regDay, army) {
+            createPlayer: function (name, pass,level, exp, money,regDay, army) {
                 return Object.create(player).newPlayer(name, pass,level, exp, money,regDay, army);
             }
         };
@@ -140,9 +140,9 @@ function bigPlayer() {
     return myModule;
 }
 
-/*let a = bigPlayer();
+/*let a = getPlayer();
 let afdsa = a.getPlayer();
 afdsa.army = 2;*/
 export default {
-    bigPlayer
+    getPlayer
 }
