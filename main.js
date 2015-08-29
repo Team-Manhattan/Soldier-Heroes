@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import logFunc from  'Moduls/loggingForm.js';
-import info from 'Moduls/loadUserInfo.js';
+import logFunc from  'Modules/loggingForm.js';
+import info from 'Modules/loadUserInfo.js';
 import factoryPlayer from 'Libraries/player.js';
 
 let storage = window.localStorage;
