@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import player from './player.js';
 
 function log() {
     "use strict";
@@ -39,19 +40,10 @@ function log() {
     });
 
     $('#register').on('click', function () {
-        /*Make new player */
-        let client = new XMLHttpRequest();
-        client.addEventListener('load', function () {
-            console.log(client.responseText);
-        });
-        client.open('GET','../usersJSON', true);
-        client.send();
-
-        
-        /*Todo: Show signed as player.username*/
-
         let username = $('#username').val();
         let password = $('#password').val();
+
+        /*Todo: Show signed as player.username*/
 
         if (/\s+/.test(username) || /\s+/.test(password) || username === '' || password === '') {
             return;
@@ -59,8 +51,12 @@ function log() {
             /*TODO:tell on user for the error*/
         }
 
+        /*register new player in mongodb*/
+        let mod = player.bigPlayer();
+        let pla = mod.getPlayer(username, password, 1, 1, 100, new Date(), []);
+        window.localStorage.setItem(pla.namePl, pla.id);
 
-
+        // this must be in second module
         $('#login-form').remove();
         $('<header />').html(`Signed as ${username}!`).appendTo('body');
     });
