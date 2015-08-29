@@ -23,8 +23,9 @@ function showLoggedUserInfo(forUser) {
     $table.append($row.clone());
     $row.html('');
 
-    $('<header id="logged-user-info"/>').append($table).appendTo('body');
-    $('<input type="button" id="sign-out" value="Sign out">').appendTo('#logged-user-info');
+
+    $('<header id="logged-user-info"/>').append($('<div/>').append($table)).appendTo('body');
+    $('<input type="button" id="sign-out" value="Sign out">').appendTo('#logged-user-info div');
 
     $('#sign-out').on('click', function () {
         window.localStorage.removeItem('loggedUser');

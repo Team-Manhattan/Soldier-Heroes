@@ -41,12 +41,14 @@ body div#login-form input[type="button"] {
     padding: 3px;
 }
 
-body header {
+body header#logged-user-info {
     padding: 10px;
     text-align: right;
+    border-bottom: 2px solid black;
+    overflow: auto;
 }
 
-body #logged-user-info {
+body header#logged-user-info div {
     float: right;
     display: block;
 }
