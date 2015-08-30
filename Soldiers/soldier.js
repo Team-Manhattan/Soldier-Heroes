@@ -20,7 +20,7 @@ var singleSoldier = (function(){
                     this.defence = soldierDefence;
                     this.hitPoints = soldierHealth;
                     this.accuracy = soldierAccuracy;
-                    this.type = soldierType;
+                    this.typeOfSoldier = soldierType;
                     return this;
                 }
             },
@@ -88,7 +88,7 @@ var singleSoldier = (function(){
                 }
             },
 
-            type: {
+            typeOfSoldier: {
                 get: function(){
                     return this._type;
                 },
@@ -102,8 +102,8 @@ var singleSoldier = (function(){
     }());
 
     return {
-        createSoldier: function (neededLevel, priceMoney, soldierDamage, soldierDefence, soldierHealth, soldierAccuracy, soldierType) {
-            return Object.create(soldier).newSoldier(neededLevel, priceMoney, soldierDamage, soldierDefence, soldierHealth, soldierAccuracy, soldierType);
+        createSoldier: function (imagePath, neededLevel, priceMoney, soldierDamage, soldierDefence, soldierHealth, soldierAccuracy, soldierType) {
+            return Object.create(soldier).newSoldier(imagePath, neededLevel, priceMoney, soldierDamage, soldierDefence, soldierHealth, soldierAccuracy, soldierType);
         }
     };
 

@@ -8,7 +8,7 @@ function loadShop(forUser) {
     let $table = $('<table cellspacing="0" cellpadding="0"/>');
     let $row = $('<tr />');
     let lockedPath = 'Images/locked.png';
-    let arrImages = [
+    let soldiersInShop = [
         generateSoldier.createSoldierByType(constants.medic),
         generateSoldier.createSoldierByType(constants.pistol),
         generateSoldier.createSoldierByType(constants.assaultRifle),
@@ -31,26 +31,28 @@ function loadShop(forUser) {
             $row.html('');
         }
 
-        if (forUser.level >= arrImages[i].requiredLvl) {
+        console.log(soldiersInShop[i].typeOfSoldier);
+
+        if (forUser.level >= soldiersInShop[i].requiredLvl) {
             let $div = $('<div />').addClass('hide');
             $('<table />')
                 .append($('<tr/>')
-                    .append($('<td>Price:<td/><td>$' + arrImages[i].price + '</td>')))
+                    .append($('<td>Price:<td/><td>$' + soldiersInShop[i].price + '</td>')))
                 .append($('<tr/>')
-                    .append($('<td>Damage:<td/><td>' + arrImages[i].damage + '</td>')))
+                    .append($('<td>Damage:<td/><td>' + soldiersInShop[i].damage + '</td>')))
                 .append($('<tr/>')
-                    .append($('<td>Defence:<td/><td>' + arrImages[i].defence + '</td>')))
+                    .append($('<td>Defence:<td/><td>' + soldiersInShop[i].defence + '</td>')))
                 .append($('<tr/>')
-                    .append($('<td>Health:<td/><td>' + arrImages[i].hitPoints + '</td>')))
+                    .append($('<td>Health:<td/><td>' + soldiersInShop[i].hitPoints + '</td>')))
                 .append($('<tr/>')
-                    .append($('<td>Accuracy:<td/><td>' + arrImages[i].accuracy + '</td>')))
+                    .append($('<td>Accuracy:<td/><td>' + soldiersInShop[i].accuracy + '</td>')))
                 .appendTo($div);
 
             $('<td />')
                 .addClass('jqui')
-                .attr('data-type', arrImages[i].type)
+                .attr('data-type', soldiersInShop[i].typeOfSoldier)
                 .append($('<img />')
-                    .attr('src', arrImages[i].image)
+                    .attr('src', soldiersInShop[i].image)
                     .addClass('open'))
                 .append($div.clone())
                 .appendTo($row);
