@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import player from '../Libraries/player.js';
 import info from './loadUserInfo.js';
-
+import shop from './shop.js';
 
 function log() {
     "use strict";
@@ -65,6 +65,7 @@ function log() {
         let pla = mod.createPlayer(username, password, 1, 1, 100, new Date(), []);
         window.localStorage.setItem('loggedUser', pla.id);
         info.showLoggedUserInfo(pla);
+        shop.loadShop(pla);
     });
 }
 

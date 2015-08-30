@@ -2,9 +2,6 @@ import errorMessages from './errorMessages.js';
 import constants from './constants.js';
 
 let patternSpaces = new RegExp('/\s+/', 'g');
-let patternDigits = new RegExp('[0-9]', 'g');
-let patternLettersLowercase = new RegExp('[a-z]', 'g');
-let patternDigitsUpperCase = new RegExp('[A-Z]', 'g');
 
 export default {
     validateCorrectStringName: function (value) {
@@ -32,10 +29,11 @@ export default {
             throw new Error(errorMessages.lengthOfPassword);
         }
 
+
         let isCorrectPassword =
-            patternDigits.test(value) &&
-            patternLettersLowercase.test(value) &&
-            patternDigitsUpperCase.test(value);
+            /[0-9]/.test(value) &&
+            /[a-z]/.test(value) &&
+            /[A-Z]/.test(value);
 
         if (!isCorrectPassword) {
             throw new Error(errorMessages.passWordConstraints);
