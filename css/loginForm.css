@@ -64,11 +64,10 @@ body form.form-signin input[type="[password"] {
 
 body .container .form-signin a {
     font-style: italic;
-    /*color: gray;*/
+    color: white;
     font-size: 15px;
 }
 
-/*not working - no idea why*/
 body .container .form-signin input[type="text"]:after {
     visibility: hidden;
     display: block;

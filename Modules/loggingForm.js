@@ -25,8 +25,8 @@ function log() {
     $('<input type="password" class="form-control" placeholder="Password" required/>').attr('id', 'password').appendTo($form);
     $('<input type="submit" id="login" class="btn btn-lg btn-primary btn-block" style="display: block" value="Sign in"/>').appendTo($form);
     $('<input type="submit" id="register" class="btn btn-lg btn-primary btn-block" style="display: none" value="Register"/>').appendTo($form);
-    $('<a  href="#" id="forReg" class="text-danger"/>').html('Don\'t have an account? Register.').appendTo($form);
-    $('<a  href="#" id="return-login" class="text-danger" style="display: none"  />').html('Already registered? Sign in.').appendTo($form);
+    $('<a  href="#" id="forReg" />').html('Don\'t have an account? Register.').appendTo($form);
+    $('<a  href="#" id="return-login" style="display: none"  />').html('Already registered? Sign in.').appendTo($form);
     $form.appendTo($div);
     $div.appendTo('body');
 
