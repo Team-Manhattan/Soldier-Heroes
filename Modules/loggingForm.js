@@ -19,7 +19,7 @@ function log() {
     $('<div class="container"/>');
     $('<h2 />').attr('class','form-signin-heading').html('Login').appendTo($form);
     $('<label />').attr('for', 'username').attr('class','sr-only').html('Username').appendTo($form);
-    $('<input type="text" placeholder="Username" id="username" required autofocus/>').attr('class', 'form-control').appendTo($form);
+    $('<input type="text" placeholder="Username" class="form-control" id="username" required autofocus/>').appendTo($form);
     $('<label />').attr('for', 'password').attr('class','sr-only').html('Password:').appendTo($form);
     $('<input type="password" class="form-control" placeholder="Password" required/>').attr('id', 'password').appendTo($form);
     $('<input type="submit" id="login" class="btn btn-lg btn-primary btn-block" style="display: block" value="Sign in"/>').appendTo($form);
