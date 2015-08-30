@@ -1,0 +1,11 @@
+body header#logged-user-info {
+    padding: 10px;
+    text-align: right;
+    border-bottom: 2px solid black;
+    overflow: auto;
+}
+
+body header#logged-user-info div {
+    float: right;
+    display: block;
+}
