@@ -42,7 +42,7 @@ function log() {
         $('#return-login').css('display','inline');
         $('#login').css('display', 'none');
         $('#register').css('display', 'block');
-        $('div#login-form h3').html('Registration');
+        $('div.container h2').html('Registration');
     });
 
     $('#return-login').on('click' ,function() {
@@ -50,7 +50,7 @@ function log() {
         $('#forReg').css('display','inline');
         $('#login').css('display', 'block');
         $('#register').css('display', 'none');
-        $('div#login-form h3').html('Login');
+        $('div.container h2').html('Login');
     });
 
     $('#register').on('click', function () {
