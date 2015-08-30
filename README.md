@@ -39,7 +39,7 @@ It could be a simple game , component library , business application or any othe
 
 ##General Requirements
 Please define and implement the following assets in your project:
-*   Use [jQuery](https://jquery.com/)
+*   Use [jQuery](https://jquery.com/) :white_check_mark:
 *   Implement OOP design
     *   Application logic using objects, modules and data hiding
         *   Both Prototypal and classical inheritances are Ok
@@ -47,7 +47,7 @@ Please define and implement the following assets in your project:
     *   At least 7 types of objects
 *   Unit tests
     *   Using [Mocha](http://mochajs.org/), [Chai](http://chaijs.com/) and [SinonJS](http://sinonjs.org/)
-*   Implement a UI for your application
+*   Implement a UI for your application :white_check_mark:
     *   Use KendoUI, jQueryUI or implement your own UI logic
 *   Use some kind of web data storage, one of the following is Ok
     *   Your backend with Node.js, PHP, ASP.NET, Django, Ruby on Rails, Spring, etc...
@@ -72,8 +72,8 @@ Follow the best practices for producing high-quality code:
 *   **Data encapsulation**
     *   Use OOP and modules
 *   **Strong cohesion** and **loose coupling**
-*   Use **GIT** as a source control system
-*   Host it on [http://github.com](http://github.com)
+*   Use **GIT** as a source control system :white_check_mark:
+*   Host it on [http://github.com](http://github.com) :white_check_mark:
 
 ##Optional Requirements
 If you have a chance, time and a suitable situation, you might add some of the following to your project:
