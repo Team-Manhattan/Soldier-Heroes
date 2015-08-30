@@ -16,7 +16,8 @@ function log() {
     $div.attr('class', 'container');
     $form.attr('class', 'form-signin');
 
-    $('<div class="container"/>');
+    // $('<div class="container"/>');
+    // $('<img class="img-responsive" src="../Images/login-background.jpg" alt="Responsive image"/>').appendTo($div);
     $('<h2 />').attr('class','form-signin-heading').html('Login').appendTo($form);
     $('<label />').attr('for', 'username').attr('class','sr-only').html('Username').appendTo($form);
     $('<input type="text" placeholder="Username" class="form-control" id="username" required autofocus/>').appendTo($form);
@@ -24,8 +25,8 @@ function log() {
     $('<input type="password" class="form-control" placeholder="Password" required/>').attr('id', 'password').appendTo($form);
     $('<input type="submit" id="login" class="btn btn-lg btn-primary btn-block" style="display: block" value="Sign in"/>').appendTo($form);
     $('<input type="submit" id="register" class="btn btn-lg btn-primary btn-block" style="display: none" value="Register"/>').appendTo($form);
-    $('<a  href="#" id="forReg"/>').html('Don\'t have an account? Register.').appendTo($form);
-    $('<a  href="#" id="return-login" style="display: none"  />').html('Already registered?').appendTo($form);
+    $('<a  href="#" id="forReg" class="text-danger"/>').html('Don\'t have an account? Register.').appendTo($form);
+    $('<a  href="#" id="return-login" class="text-danger" style="display: none"  />').html('Already registered? Sign in.').appendTo($form);
     $form.appendTo($div);
     $div.appendTo('body');
 

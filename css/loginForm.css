@@ -8,6 +8,12 @@ body {
     background-color: #eee;
 }
 
+/*body .container {
+    background-image: url('../Images/login-background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+}*/
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -49,7 +55,7 @@ body form.form-signin input[type="[password"] {
 
 body .container .form-signin a {
     font-style: italic;
-    color: gray;
+    /*color: gray;*/
     font-size: 15px;
 }
 
