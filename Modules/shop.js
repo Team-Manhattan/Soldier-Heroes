@@ -31,8 +31,6 @@ function loadShop(forUser) {
             $row.html('');
         }
 
-        console.log(soldiersInShop[i].typeOfSoldier);
-
         if (forUser.level >= soldiersInShop[i].requiredLvl) {
             let $div = $('<div />').addClass('hide');
             $('<table />')

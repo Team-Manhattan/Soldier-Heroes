@@ -88,7 +88,6 @@ var singleSoldier = (function(){
                 }
             },
 
-            /*type was not wokring*/
             typeOfSoldier: {
                 get: function(){
                     return this._type;
