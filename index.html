@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soldier Heroes</title>
     <link rel="shortcut icon" type="image/png" href="/Images/favicon.ico"/>
 
@@ -10,7 +9,10 @@
 <body>
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
+    <script src="Libraries/External/jquery.js"></script>
+    <script src="Libraries/bootstrap/js/bootstrap.min.js"></script>
     <script>
+        System.import('Libraries/bootstrap/css/bootstrap.min.css!');
         System.import('css/loginForm.css!');
         System.import('css/user-info.css!');
         System.import('css/shopStyle.css!');
