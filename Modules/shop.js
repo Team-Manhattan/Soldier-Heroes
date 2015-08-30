@@ -1,9 +1,10 @@
 import $ from 'jquery';
 import constants from '../Libraries/constants.js';
+import '../Libraries/External/jquery-ui.js';
 
 function loadShop(forUser) {
     "use strict";
-    let $table = $('<table cellspacing="0" cellpadding="0"/>')
+    let $table = $('<table cellspacing="0" cellpadding="0"/>');
     let $row = $('<tr />');
     let lockedPath = 'Images/locked.png';
     let arrImages = [{
@@ -13,7 +14,8 @@ function loadShop(forUser) {
         damage: 40,
         defence: 25,
         hitPoints: 120,
-        accuracy: 33
+        accuracy: 33,
+        type: 'assault'
     }, {
         imgPath: '/Images/Player/medic.png',
         requiredLvl: 1,
@@ -21,7 +23,8 @@ function loadShop(forUser) {
         damage: 5,
         defence: 25,
         hitPoints: 50,
-        accuracy: 10
+        accuracy: 10,
+        type: 'medic'
     }, {
         imgPath: '/Images/Player/pistol.png',
         requiredLvl: 1,
@@ -29,7 +32,8 @@ function loadShop(forUser) {
         damage: 15,
         defence: 20,
         hitPoints: 100,
-        accuracy: 20
+        accuracy: 20,
+        type: 'pistol'
     }, {
         imgPath: '/Images/Player/sniper.png',
         requiredLvl: 1,
@@ -37,7 +41,8 @@ function loadShop(forUser) {
         damage: 60,
         defence: 10,
         hitPoints: 60,
-        accuracy: 100
+        accuracy: 100,
+        type: 'sniper'
     }, {
         imgPath: '/Images/Player/grenadier.png',
         requiredLvl: 2,
@@ -45,7 +50,8 @@ function loadShop(forUser) {
         damage: 70,
         defence: 8,
         hitPoints: 80,
-        accuracy: 20
+        accuracy: 20,
+        type: 'grenadier'
     }, {
         imgPath: '/Images/Player/grenadier.png',
         requiredLvl: 2,
@@ -53,7 +59,8 @@ function loadShop(forUser) {
         damage: 70,
         defence: 8,
         hitPoints: 80,
-        accuracy: 20
+        accuracy: 20,
+        type: 'grenadier'
     }, {
         imgPath: '/Images/Player/grenadier.png',
         requiredLvl: 2,
@@ -61,7 +68,8 @@ function loadShop(forUser) {
         damage: 70,
         defence: 8,
         hitPoints: 80,
-        accuracy: 20
+        accuracy: 20,
+        type: 'grenadier'
     }, {
         imgPath: '/Images/Player/grenadier.png',
         requiredLvl: 2,
@@ -69,7 +77,8 @@ function loadShop(forUser) {
         damage: 70,
         defence: 8,
         hitPoints: 80,
-        accuracy: 20
+        accuracy: 20,
+        type: 'grenadier'
     }, {
         imgPath: '/Images/Player/grenadier.png',
         requiredLvl: 2,
@@ -77,7 +86,8 @@ function loadShop(forUser) {
         damage: 70,
         defence: 8,
         hitPoints: 80,
-        accuracy: 20
+        accuracy: 20,
+        type: 'grenadier'
     }, {
         imgPath: '/Images/Player/grenadier.png',
         requiredLvl: 2,
@@ -85,7 +95,8 @@ function loadShop(forUser) {
         damage: 70,
         defence: 8,
         hitPoints: 80,
-        accuracy: 20
+        accuracy: 20,
+        type: 'grenadier'
     }, {
         imgPath: '/Images/Player/grenadier.png',
         requiredLvl: 2,
@@ -93,7 +104,8 @@ function loadShop(forUser) {
         damage: 70,
         defence: 8,
         hitPoints: 80,
-        accuracy: 20
+        accuracy: 20,
+        type: 'grenadier'
     }, {
         imgPath: '/Images/Player/grenadier.png',
         requiredLvl: 2,
@@ -101,7 +113,8 @@ function loadShop(forUser) {
         damage: 70,
         defence: 8,
         hitPoints: 80,
-        accuracy: 20
+        accuracy: 20,
+        type: 'grenadier'
     }];
 
     $('<thead />').html('<th colspan="4" >SHOP</th>').appendTo($table);
@@ -128,6 +141,8 @@ function loadShop(forUser) {
                 .appendTo($div);
 
             $('<td />')
+                .addClass('jqui')
+                .attr('data-type', arrImages[i].type)
                 .append($('<img />')
                     .attr('src', arrImages[i].imgPath)
                     .addClass('open'))
@@ -152,7 +167,9 @@ function loadShop(forUser) {
     $('<main id="shop" />')
         .css('left', ((window.innerWidth / 2) - 400) + 'px')
         .css('top', ((window.innerHeight / 2) - 200) + 'px')
-        .append($table).appendTo('body');
+        .append($table)
+        .append($('<input id="buy-soldiers" type="button" value="BUY" disabled="disabled"/>').prop('disabled', true))
+        .appendTo('body');
 
     $('#shop').on('mouseover', 'img.open', function () {
         let parent = $(this).parent();
@@ -167,6 +184,24 @@ function loadShop(forUser) {
             .removeClass('soldier-info')
             .addClass('hide');
     });
+
+    $('main#shop table').on('click', function() {
+        if (hasSelectedSoldier()) {
+            $('#buy-soldiers').prop('disabled', false);
+        } else {
+            $('#buy-soldiers').prop('disabled', true);
+        }
+    }).selectable({
+        filter: 'td.jqui'
+    });
+
+    function hasSelectedSoldier() {
+        let collection = $('main#shop table').find('.ui-selected');
+        if (collection.length) {
+        	return true;
+        }
+        return false;
+    }
 }
 
 export default {
