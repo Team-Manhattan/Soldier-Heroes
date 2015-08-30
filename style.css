@@ -53,6 +53,11 @@ body header#logged-user-info div {
     display: block;
 }
 
+body main#shop {
+    position: absolute;
+    margin: 50px;
+}
+
 body main#shop table tbody tr td:last-of-type {
     border-right: 1px solid #008000;
 }

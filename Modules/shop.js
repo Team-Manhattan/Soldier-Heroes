@@ -3,7 +3,7 @@ import constants from '../Libraries/constants.js';
 
 function loadShop(forUser) {
     "use strict";
-    let $table = $('<table cellspacing="0" cellpadding="0"/>');
+    let $table = $('<table cellspacing="0" cellpadding="0"/>')
     let $row = $('<tr />');
     let lockedPath = 'Images/locked.png';
     let arrImages = [{
@@ -149,7 +149,10 @@ function loadShop(forUser) {
         }
     }
 
-    $('<main id="shop" />').append($table).appendTo('body');
+    $('<main id="shop" />')
+        .css('left', ((window.innerWidth / 2) - 400) + 'px')
+        .css('top', ((window.innerHeight / 2) - 200) + 'px')
+        .append($table).appendTo('body');
 
     $('#shop').on('mouseover', 'img.open', function () {
         let parent = $(this).parent();
