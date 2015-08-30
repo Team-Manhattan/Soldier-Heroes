@@ -3,12 +3,21 @@ body, ul, li, a, img, table, td, tr {
     margin: 0;
 }
 
-body {
-    padding: 40px 0px 40px 0px;
-    background-color: #eee;
+html { 
+  background: url(../Images/fantasy-warrior.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-/*body .container {
+body {
+    padding: 40px 0px 40px 0px;
+    /*background-color: #eee;*/
+    background: transparent;
+}
+
+/*body {
     background-image: url('../Images/login-background.jpg');
     background-repeat: no-repeat;
     background-position: center;
@@ -21,7 +30,7 @@ body {
 }
 
 .form-signin .form-control {
-    position: relative;
+  position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
