@@ -1,19 +1,21 @@
-body, div, ul, li, input, a, img, table, td, tr {
+body, ul, li, input, a, img, table, td, tr {
     padding: 0;
     margin: 0;
-    font-family: Arial;
 }
 
-body div#login-form {
-    position: absolute;
-    width: 240px;
-    /*height: 150px;*/
-    border: 2px solid red;
+body {
+    padding: 40px 40px;
 }
 
-body div#login-form h3 {
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+body div.container form.form-signin h2 {
     text-align: center;
-    background-color: #a9a9a9;
+    font-weight: bold;
     padding: 5px;
     margin-top: 0;
 }

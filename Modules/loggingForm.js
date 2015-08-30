@@ -11,18 +11,22 @@ function log() {
     let width = window.innerWidth - 0;
     let height = window.innerHeight - 0;
     let $div = $('<div/>');
-    $div.attr('id', 'login-form');
+    let $form = $('<form />');
+    // $div.attr('id', 'login-form');
+    $div.attr('class', 'container');
+    $form.attr('class', 'form-signin');
 
-    $('<h3 />').html('Login').appendTo($div);
-    $('<label />').attr('for', 'username').html('Username:').appendTo($div);
-    $('<input type="text" id="username"/>').appendTo($div);
-    $('<label />').attr('for', 'password').html('Password:').appendTo($div);
-    $('<input type="password"/>').attr('id', 'password').appendTo($div);
-    $('<input type="button" id="login" style="display: block" value="Sign in"/>').appendTo($div);
-    $('<input type="button" id="register" style="display: none" value="Register" />').appendTo($div);
-    $('<a  href="#" id="forReg"/>').html('Don\'t have an account? Register.').appendTo($div);
-    $('<a  href="#" id="return-login" style="display: none"  />').html('Already registered?').appendTo($div);
-    $div.attr('style', 'left: ' + ((width / 2) - 120) + 'px; top: ' + ((height / 2) - 75) + 'px;');
+    $('<div class="container"/>');
+    $('<h2 />').attr('class','form-signin-heading').html('Login').appendTo($form);
+    $('<label />').attr('for', 'username').attr('class','sr-only').html('Username').appendTo($form);
+    $('<input type="text" placeholder="Username" id="username" required autofocus/>').attr('class', 'form-control').appendTo($form);
+    $('<label />').attr('for', 'password').attr('class','sr-only').html('Password:').appendTo($form);
+    $('<input type="password" class="form-control" placeholder="Password" required/>').attr('id', 'password').appendTo($form);
+    $('<input type="submit" id="login" class="btn btn-lg btn-primary btn-block" style="display: block" value="Sign in"/>').appendTo($form);
+    $('<input type="submit" id="register" class="btn btn-lg btn-primary btn-block" style="display: none" value="Register"/>').appendTo($form);
+    $('<a  href="#" id="forReg"/>').html('Don\'t have an account? Register.').appendTo($form);
+    $('<a  href="#" id="return-login" style="display: none"  />').html('Already registered?').appendTo($form);
+    $form.appendTo($div);
     $div.appendTo('body');
 
     $('#login').on('click', function () {
