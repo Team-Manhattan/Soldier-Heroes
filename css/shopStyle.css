@@ -1,6 +1,9 @@
 body main#shop {
     position: absolute;
     margin: 50px;
+}
+
+body main#shop table tbody {
     background-color: rgba(162, 145, 63, 0.4);
 }
 
