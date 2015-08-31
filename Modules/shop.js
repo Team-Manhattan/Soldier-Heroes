@@ -71,8 +71,8 @@ function loadShop(forUser) {
     }
 
     $('<main id="shop" />')
-        .css('left', ((window.innerWidth / 2) - 400) + 'px')
-        .css('top', ((window.innerHeight / 2) - 200) + 'px')
+        .css('right', '100px')
+        .css('top', '150px')
         .append($table)
         .append($('<input id="buy-soldiers" type="button" value="BUY" disabled="disabled"/>').prop('disabled', true))
         .appendTo('body');
