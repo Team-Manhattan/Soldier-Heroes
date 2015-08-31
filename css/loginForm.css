@@ -12,7 +12,7 @@ html {
 }
 
 body {
-    padding: 40px 0px 40px 0px;
+    padding: 40px 0 40px 0;
     /*background-color: #eee;*/
     background: transparent;
 }
@@ -66,6 +66,7 @@ body .container .form-signin a {
     font-style: italic;
     color: white;
     font-size: 15px;
+    text-shadow: 1px 1px 1px rgb(35, 82, 124);
 }
 
 body .container .form-signin input[type="text"]:after {

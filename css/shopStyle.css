@@ -1,6 +1,7 @@
 body main#shop {
     position: absolute;
     margin: 50px;
+    background-color: rgba(162, 145, 63, 0.4);
 }
 
 body main#shop table tbody tr td:last-of-type {
