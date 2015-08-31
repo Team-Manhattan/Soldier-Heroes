@@ -77,8 +77,50 @@ body main#shop table tr td.ui-selected {
     color: white;
 }
 
-body main#shop input#buy-soldiers[type='button'] {
+body main#shop input[type='button'] {
     width: 100%;
     height: 30px;
     font-weight: bold;
+    background-color: greenyellow;
 }
+
+body main#shop input[disabled] {
+    background-color: rgba(169, 169, 169, 0.6);
+    border-style: none;
+}
+
+body main#shop div#container-army {
+    position: absolute;
+    left: -190px;
+    top: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 170px;
+}
+
+body main#shop div#container-army p {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #008000;
+    text-align: center;
+    font-weight: bold;
+    color: #f0f8ff;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+body main#shop div#container-army ul {
+    background-color: rgba(162, 145, 63, 0.4);
+    border: 1px solid #008000;
+    overflow: auto;
+    height: 271px;
+}
+
+body main#shop div#container-army ul li {
+    background: no-repeat;
+    background-size: 80px 70px;
+    display: block;
+    width: 70px;
+    height: 80px;
+}
+

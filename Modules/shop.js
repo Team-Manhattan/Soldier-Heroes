@@ -6,6 +6,7 @@ import generateSoldier from '../Soldiers/createSoldierOfType.js';
 function loadShop(forUser) {
     "use strict";
     let $table = $('<table cellspacing="0" cellpadding="0"/>');
+    let $divPlayerArmy = $('<div />');
     let $row = $('<tr />');
     let lockedPath = 'Images/locked.png';
     let soldiersInShop = [
@@ -70,21 +71,28 @@ function loadShop(forUser) {
         }
     }
 
+    $divPlayerArmy
+        .attr('id', 'container-army')
+        .append($('<p />').html('Your army'))
+        .append($('<ul />').attr('id', 'player-army'))
+        .append($('<input id="start-battle" type="button" value="START" />').prop('disabled', true));
+
     $('<main id="shop" />')
         .css('right', '100px')
         .css('top', '150px')
         .append($table)
-        .append($('<input id="buy-soldiers" type="button" value="BUY" disabled="disabled"/>').prop('disabled', true))
+        .append($('<input id="buy-soldiers" type="button" value="BUY" />').prop('disabled', true))
+        .append($divPlayerArmy)
         .appendTo('body');
 
-    $('#shop').on('mouseover', 'img.open', function () {
+    $('body').on('mouseover', '#shop img.open', function () {
         let parent = $(this).parent();
         parent.find('div.hide')
             .removeClass('hide')
             .addClass('soldier-info');
     });
 
-    $('#shop').on('mouseout', 'img.open', function () {
+    $('body').on('mouseout', '#shop img.open', function () {
         let parent = $(this).parent();
         parent.find('div.soldier-info')
             .removeClass('soldier-info')
@@ -109,7 +117,38 @@ function loadShop(forUser) {
         return false;
     }
 
-    $('#buy-soldiers').on('click', function () {
+    $('body').on('click', '#buy-soldiers', function () {
+        let $fragment = $(document.createDocumentFragment());
+        let $selectedSoldiersFromShop = $('.ui-selected');
+        let len = $selectedSoldiersFromShop.length;
+        let sum = 0;
+        for (let i = 0; i < len; i += 1) {
+            let dataType = $selectedSoldiersFromShop[i].attributes['data-type'];
+            let soldierType = $(dataType).val();
+            let soldier = generateSoldier.createSoldierByType(soldierType);
+            let backgroundImageLink = soldier.image;
+            sum += soldier.price;
+            $('<li />')
+                .css('background-image', 'url("../' + backgroundImageLink + '")')
+                .appendTo($fragment);
+
+        }
+
+        if (sum > forUser.money) {
+
+            let error = $('<p>Not enough Money</p>');
+            error.addClass('error-message')
+                .insertAfter('#buy-soldiers')
+                .fadeIn(500)
+                .fadeOut(2000);
+                /*.remove(); HOW*/
+
+        } else {
+            $('#player-army').append($fragment);
+            $('#start-battle').prop('disabled', false);
+            forUser.money -= sum;
+            $('#money td:last-of-type').html('$' + forUser.money);
+        }
 
     });
 }

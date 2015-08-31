@@ -8,6 +8,7 @@ export default {
     lengthOfID: `Length of ID must be ${constants.LENGTH_OF_ID}` ,
     passWordConstraints: `Password must contain letters of upper and lower case and digits!`,
     notANumber: `The value is not a digit!`,
-    zeroLevel: `Level can't be zero!`
+    zeroLevel: `Level can't be zero!`,
+    wrongMoney: `Money must be => 0!`
 
 }

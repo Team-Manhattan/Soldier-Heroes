@@ -69,6 +69,13 @@ export default {
         }
     },
 
+    correctMoney: function (value) {
+        "use strict";
+        if ((value - 0) < 0) {
+            throw new Error('');
+        }
+    },
+
     correctArray: function (value) {
         "use strict";
         if (!Array.isArray(value)) {
