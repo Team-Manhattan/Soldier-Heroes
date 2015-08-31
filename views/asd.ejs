@@ -3,15 +3,20 @@
     <head>
         <meta charset="utf-8">
         <title></title>
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     </head>
     <body>
+        <div>KUREEEC</div>
+        <% if (player) { %>
+            <div> <%=player %></div>
+        <% } %>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="jspm_packages/system.js"></script>
         <script src="config.js"></script>
         <script>
             System.import('style.css!');
             System.import('main.js');
 
+            console.log(<%=player%>);
         </script>
     </body>
 </html>

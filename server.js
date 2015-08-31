@@ -14,21 +14,27 @@ var express = require('express'),
     path = require('path');
     //config = require('./config.js');
 
-//TODO
-//require('./config/passport.js')(passport);
+require('./config/passport.js')(passport);
 
 app.use(morgan('dev')); //logs every request
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json())
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); //get information from html forms
+/*app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json())*/
 //app.use(cookieParser); //reads cookies for authentication
 
 //required for passport
-app.use(session({secret: 'thequickbrownfoxjumpsovertherabbit',
+app.use(session({secret: 'thequickbrownfoxjumpsovertherabbit'}));
+app.use(passport.initialize());
+app.use(passport.session()); //persistent login sessions
+app.use(flash()); //use connect-flash for flash messages stored in session
+//required for passport
+/*app.use(session({secret: 'thequickbrownfoxjumpsovertherabbit',
                 saveUninitialized: true,
                 resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
+app.use(flash());*/
 
 require('./app/router.js')(app, passport);
 

@@ -1,6 +1,3 @@
-import $ from 'jquery';
-import loginForm from './loggingForm.js';
-
 function showLoggedUserInfo(forUser) {
     "use strict";
     $('body').html('');
@@ -28,12 +25,7 @@ function showLoggedUserInfo(forUser) {
     $('<input type="button" id="sign-out" value="Sign out">').appendTo('#logged-user-info div');
 
     $('#sign-out').on('click', function () {
-        /*window.localStorage.removeItem('loggedUser');
-        loginForm.log();*/
-        //TODO
+        window.localStorage.removeItem('loggedUser');
+        loginForm.log();
     });
 }
-
-export default {
-    showLoggedUserInfo
-};

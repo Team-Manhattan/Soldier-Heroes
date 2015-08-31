@@ -6,7 +6,7 @@ import shop from './shop.js';
 function log() {
     "use strict";
 
-    $('body').html('');
+    //$('body').html('');
 
     let width = window.innerWidth - 0;
     let height = window.innerHeight - 0;
@@ -26,11 +26,24 @@ function log() {
     $div.appendTo('body');
 
     $('#login').on('click', function () {
-        /*TODO:CHECK IN users db for existence of this user*/
-        /*TODO:CHECK if the password matches*/
-        /*TODO:Create object "player" with properties form gb data: money, exp, level, army etc.*/
-        /*TODO:save id of the user in "localStarage" - it is special number six different digits*/
-        /*TODO:Then Load on the shop menu*/
+        let username = $('#username').val();
+        let password = $('#password').val();
+        $.ajax({
+            url: '/login',
+            type: 'POST',
+            data: {
+                username: username,
+                password: password
+            }
+        })
+        .done(function (res) {
+            var newDoc = document.open("text/html", "replace");
+            newDoc.write(res);
+            newDoc.close();
+        })
+        .fail(function(res) {
+            console.log(res);
+        });
     });
 
     $('#forReg').on('click', function () {
@@ -62,10 +75,31 @@ function log() {
 
         /*register new player in mongodb*/
         let mod = player.getPlayer();
-        let pla = mod.createPlayer(username, password, 1, 1, 100, new Date(), []);
+        /*let pla = mod.createPlayer(username, password, 1, 1, 100, new Date(), []);
         window.localStorage.setItem('loggedUser', pla.id);
         info.showLoggedUserInfo(pla);
-        shop.loadShop(pla);
+        shop.loadShop(pla);*/
+        $.ajax({
+            url: '/register',
+            type: 'POST',
+            data: {
+                username: username,
+                password: password
+            }
+        })
+        .done(function(res) {
+            console.log(res);
+            if (res.username) {
+                info.showLoggedUserInfo(res);
+                shop.loadShop(res);
+            } else {
+                alert('could not register');
+            }
+        })
+        .fail(function() {
+            alert('AJAX FAILED');
+        });
+
     });
 }
 
