@@ -67,7 +67,7 @@ function log() {
 
         /*register new player in mongodb*/
         let mod = player.getPlayer();
-        let pla = mod.createPlayer(username, password, 1, 1, 100, new Date(), []);
+        let pla = mod.createPlayer(username, password, 1, 1, 2000, new Date(), []);
         window.localStorage.setItem('loggedUser', pla.id);
         info.showLoggedUserInfo(pla);
         shop.loadShop(pla);
