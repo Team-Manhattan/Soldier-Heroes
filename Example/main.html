@@ -62,11 +62,11 @@
     </style>
 </head>
 <body>
-<form action="">
+<form action="" id="form">
     <label for="username">Username:</label> <input id="username" type="text"/> <br/>
     <label for="pass" style="margin-top: 5px">Password:</label> <input style="margin-top: 5px" id="pass" type="text"/> <br/>
-    <input type="button" value="Login" style=" margin-top: 5px; width: 120px; height: 30px">
-    <a href="#" style="color: gray; font-style: italic; font-size: 15px">Need a registration?</a>
+    <input type="button" value="Login" style=" margin-top: 5px; width: 120px; height: 30px" id="login">
+    <input type="button" value="Register" style="margin-top: 5px; width: 120px; height: 30px" id="register">
 </form>
     <!-- signed as Money:-->
 <table id="shop">
@@ -159,6 +159,7 @@
     <td></td>
     </tr>
 </table>
+<script src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
 <script>
     var tr = document.getElementsByClassName('level1')[0];
     for (var i = 0; i < tr.children.length; i += 1) {
@@ -184,6 +185,42 @@
             }
         });
     }
+    
+    Parse.initialize("TXxXJyZcN2FgRpdrRh5j8AiIqnlOOD7BSh700Ayf", "IJpaeoVtPgcStCdFyMsybAnLN1zdAL7YhgzdEJlu");
+    
+    var loginButton = document.getElementById('login'),
+        registerButton = document.getElementById('register');
+    
+    loginButton.addEventListener('click', function(ev){
+        var userName = document.getElementById('username').value,
+            password = document.getElementById('pass').value,
+            form = document.getElementById('form');
+            
+            
+        Parse.User.logIn(userName, password)
+            .then(function(){
+                alert("User logged in successfully.");
+                form.parentNode.removeChild(form);
+            }, function(err){
+                alert("Invalid username and password combination");
+            });
+        console.log(userName,password);
+    }, false);
+    
+    registerButton.addEventListener('click', function(ev){
+        var userName = document.getElementById('username').value,
+            password = document.getElementById('pass').value,
+            form = document.getElementById('form');
+            
+        Parse.User.signUp(userName, password)
+            .then(function(){
+                alert('User created successfully');
+                form.parentNode.removeChild(form);
+            }, function(err){
+                alert("Error: " + JSON.stringify(err));
+            });
+    }, false)
+    
 </script>
 </body>
 </html>
