@@ -140,9 +140,6 @@ function getPlayer() {
     return myModule;
 }
 
-/*let a = getPlayer();
-let afdsa = a.getPlayer();
-afdsa.army = 2;*/
 export default {
     getPlayer
 }

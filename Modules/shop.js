@@ -109,6 +109,41 @@ function loadShop(forUser) {
         filter: 'td.jqui'
     });
 
+    $('body').on('click', '#buy-soldiers', function () {
+        let $fragment = $(document.createDocumentFragment());
+        let $selectedSoldiersFromShop = $('.ui-selected');
+        let len = $selectedSoldiersFromShop.length;
+        let armyToTransfer = [];
+        let sum = 0;
+        for (let i = 0; i < len; i += 1) {
+            let dataType = $selectedSoldiersFromShop[i].attributes['data-type'];
+            let soldierType = $(dataType).val();
+            let soldier = generateSoldier.createSoldierByType(soldierType);
+            let backgroundImageLink = soldier.image;
+            armyToTransfer.push(soldier);
+            sum += soldier.price;
+            $('<li />')
+                .css('background-image', 'url("../' + backgroundImageLink + '")')
+                .appendTo($fragment);
+
+        }
+        if (forUser.army.length >= constants.MAX_ARMY_LENGTH) {
+            showError(`Your army is full! Max soldiers ${constants.MAX_ARMY_LENGTH}`);
+        } else if (sum > forUser.money) {
+            showError(`Not enough money! Need more $ + ${sum - forUser.money}`);
+        } else {
+            $('#player-army').append($fragment);
+            $('#start-battle').prop('disabled', false);
+            forUser.money -= sum;
+            armyToTransfer.forEach(function(item) {
+                    forUser.army.push(item);
+            });
+
+            $('#money td:last-of-type').html('$' + forUser.money);
+        }
+
+    });
+
     function hasSelectedSoldier() {
         let collection = $('main#shop table').find('.ui-selected');
         if (collection.length) {
@@ -117,40 +152,16 @@ function loadShop(forUser) {
         return false;
     }
 
-    $('body').on('click', '#buy-soldiers', function () {
-        let $fragment = $(document.createDocumentFragment());
-        let $selectedSoldiersFromShop = $('.ui-selected');
-        let len = $selectedSoldiersFromShop.length;
-        let sum = 0;
-        for (let i = 0; i < len; i += 1) {
-            let dataType = $selectedSoldiersFromShop[i].attributes['data-type'];
-            let soldierType = $(dataType).val();
-            let soldier = generateSoldier.createSoldierByType(soldierType);
-            let backgroundImageLink = soldier.image;
-            sum += soldier.price;
-            $('<li />')
-                .css('background-image', 'url("../' + backgroundImageLink + '")')
-                .appendTo($fragment);
-
-        }
-
-        if (sum > forUser.money) {
-
-            let error = $('<p>Not enough Money</p>');
-            error.addClass('error-message')
-                .insertAfter('#buy-soldiers')
-                .fadeIn(500)
-                .fadeOut(2000);
-                /*.remove(); HOW*/
-
-        } else {
-            $('#player-army').append($fragment);
-            $('#start-battle').prop('disabled', false);
-            forUser.money -= sum;
-            $('#money td:last-of-type').html('$' + forUser.money);
-        }
-
-    });
+    function showError(errMessage) {
+        let error = $('<p>' + errMessage + ' </p>');
+        error.addClass('error-message')
+            .insertAfter('#buy-soldiers')
+            .fadeIn(500)
+            .fadeOut(2000, function () {
+                console.log(this);
+                $(this).remove();
+            });
+    }
 }
 
 export default {
