@@ -48,6 +48,7 @@ body div.container form.form-signin h2 {
     font-weight: bold;
     padding: 5px;
     margin-top: 0;
+    text-shadow: 2px 2px 2px white;
 }
 
 body form.form-signin input[type="text"] {

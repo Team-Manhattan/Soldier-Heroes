@@ -129,3 +129,8 @@ body main#shop div#container-army ul li {
     height: 80px;
 }
 
+body main#shop div#container-army ul li.ui-state-highlight {
+    background-color: rgba(121, 234, 88, 0.4);
+    border-radius: 5px;
+    border: 3px solid rgb(28, 128, 6);
+}

@@ -99,6 +99,7 @@ function loadShop(forUser) {
             .addClass('hide');
     });
 
+    /*jquery ui selectable*/
     $('main#shop table').on('click', function () {
         if (hasSelectedSoldier()) {
             $('#buy-soldiers').prop('disabled', false);
@@ -108,6 +109,13 @@ function loadShop(forUser) {
     }).selectable({
         filter: 'td.jqui'
     });
+
+    /*jquery ui sortable*/
+    $('div#container-army ul#player-army')
+        .sortable({
+            placeholder: "ui-state-highlight"
+        })
+        .disableSelection();
 
     $('body').on('click', '#buy-soldiers', function () {
         let $fragment = $(document.createDocumentFragment());
@@ -123,14 +131,19 @@ function loadShop(forUser) {
             armyToTransfer.push(soldier);
             sum += soldier.price;
             $('<li />')
+                .addClass('ui-state-default')
                 .css('background-image', 'url("../' + backgroundImageLink + '")')
                 .appendTo($fragment);
 
         }
+
+        if (forUser.army.length + armyToTransfer.length > constants.MAX_ARMY_LENGTH) {
+        	showError(`Your army can be with length ${constants.MAX_ARMY_LENGTH}!`);
+        } else
         if (forUser.army.length >= constants.MAX_ARMY_LENGTH) {
             showError(`Your army is full! Max soldiers ${constants.MAX_ARMY_LENGTH}`);
         } else if (sum > forUser.money) {
-            showError(`Not enough money! Need more $ + ${sum - forUser.money}`);
+            showError(`Not enough money! Need more $ + ${sum - forUser.money}.`);
         } else {
             $('#player-army').append($fragment);
             $('#start-battle').prop('disabled', false);
@@ -138,7 +151,7 @@ function loadShop(forUser) {
             armyToTransfer.forEach(function(item) {
                     forUser.army.push(item);
             });
-
+            $('div#container-army p').html('YOUR ARMY ' + forUser.army.length);
             $('#money td:last-of-type').html('$' + forUser.money);
         }
 
