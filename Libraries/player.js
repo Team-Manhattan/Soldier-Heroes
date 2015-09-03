@@ -1,25 +1,23 @@
-import constants from './constants.js';
-import validator from './validator.js';
-
 function generateId() {
     "use strict";
-    let id = '';
+    var id = '';
 
-    for (let i = 0, constraint = constants.LENGTH_OF_ID; i < constraint; i += 1) {
+    for (var i = 0, constraint = constants.LENGTH_OF_ID; i < constraint; i += 1) {
         id += ((Math.random() * 9) | 0)+ '';
     }
 
     return id;
 }
 
-function getPlayer() {
+// TODO : might be an IIFE
+var getPlayer = (function getPlayer() {
     "use strict";
 
-    let myModule = (function () {
+    var myModule = (function () {
 
-        let player = (function () {
+        var player = (function () {
 
-            let player = Object.create({});
+            var player = Object.create({});
 
             Object.defineProperties(player, {
                 newPlayer: {
@@ -138,8 +136,4 @@ function getPlayer() {
         };
     }());
     return myModule;
-}
-
-export default {
-    getPlayer
-}
+})();

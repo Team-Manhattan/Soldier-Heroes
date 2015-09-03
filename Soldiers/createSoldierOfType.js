@@ -1,16 +1,12 @@
-import factory from './soldier.js';
-import constants from '../Libraries/constants.js';
-
 function createSoldierByType(type) {
     "use strict";
-    let barrack = factory.singleSoldier;
-    let imgPath;
-    let requiredLvl;
-    let damage;
-    let defence;
-    let price;
-    let accuracy;
-    let health;
+    var imgPath;
+    var requiredLvl;
+    var damage;
+    var defence;
+    var price;
+    var accuracy;
+    var health;
 
     switch (type) {
         case constants.pistol:
@@ -63,8 +59,4 @@ function createSoldierByType(type) {
     }
 
     return barrack.createSoldier(imgPath, requiredLvl, price, damage, defence, health, accuracy, type);
-}
-
-export default {
-    createSoldierByType
 }

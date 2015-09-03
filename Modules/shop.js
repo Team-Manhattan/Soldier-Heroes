@@ -1,39 +1,34 @@
-import $ from 'jquery';
-import constants from '../Libraries/constants.js';
-import '../Libraries/External/jquery-ui.js';
-import generateSoldier from '../Soldiers/createSoldierOfType.js';
-
 function loadShop(forUser) {
     "use strict";
-    let $table = $('<table cellspacing="0" cellpadding="0"/>');
-    let $divPlayerArmy = $('<div />');
-    let $row = $('<tr />');
-    let lockedPath = 'Images/locked.png';
-    let soldiersInShop = [
-        generateSoldier.createSoldierByType(constants.medic),
-        generateSoldier.createSoldierByType(constants.pistol),
-        generateSoldier.createSoldierByType(constants.assaultRifle),
-        generateSoldier.createSoldierByType(constants.sniper),
-        generateSoldier.createSoldierByType(constants.grenadier),
-        generateSoldier.createSoldierByType(constants.grenadier),
-        generateSoldier.createSoldierByType(constants.grenadier),
-        generateSoldier.createSoldierByType(constants.grenadier),
-        generateSoldier.createSoldierByType(constants.grenadier),
-        generateSoldier.createSoldierByType(constants.grenadier),
-        generateSoldier.createSoldierByType(constants.grenadier),
-        generateSoldier.createSoldierByType(constants.grenadier)
+    var $table = $('<table cellspacing="0" cellpadding="0"/>');
+    var $divPlayerArmy = $('<div />');
+    var $row = $('<tr />');
+    var lockedPath = 'Images/locked.png';
+    var soldiersInShop = [
+        createSoldierByType(constants.medic),
+        createSoldierByType(constants.pistol),
+        createSoldierByType(constants.assaultRifle),
+        createSoldierByType(constants.sniper),
+        createSoldierByType(constants.grenadier),
+        createSoldierByType(constants.grenadier),
+        createSoldierByType(constants.grenadier),
+        createSoldierByType(constants.grenadier),
+        createSoldierByType(constants.grenadier),
+        createSoldierByType(constants.grenadier),
+        createSoldierByType(constants.grenadier),
+        createSoldierByType(constants.grenadier)
     ];
 
     $('<thead />').html('<th colspan="4" >SHOP</th>').appendTo($table);
 
-    for (let i = 0, len = constants.LENGTH_SHOP_ITEMS; i < len; i += 1) {
+    for (var i = 0, len = constants.LENGTH_SHOP_ITEMS; i < len; i += 1) {
         if ((i !== 0 && i % 4 === 0)) {
             $table.append($row.clone());
             $row.html('');
         }
 
-        if (forUser.level >= soldiersInShop[i].requiredLvl) {
-            let $div = $('<div />').addClass('hide');
+        if (forUser.get("level") >= soldiersInShop[i].requiredLvl) {
+            var $div = $('<div />').addClass('hide');
             $('<table />')
                 .append($('<tr/>')
                     .append($('<td>Price:<td/><td>$' + soldiersInShop[i].price + '</td>')))
@@ -86,14 +81,14 @@ function loadShop(forUser) {
         .appendTo('body');
 
     $('body').on('mouseover', '#shop img.open', function () {
-        let parent = $(this).parent();
+        var parent = $(this).parent();
         parent.find('div.hide')
             .removeClass('hide')
             .addClass('soldier-info');
     });
 
     $('body').on('mouseout', '#shop img.open', function () {
-        let parent = $(this).parent();
+        var parent = $(this).parent();
         parent.find('div.soldier-info')
             .removeClass('soldier-info')
             .addClass('hide');
@@ -118,16 +113,16 @@ function loadShop(forUser) {
         .disableSelection();
 
     $('body').on('click', '#buy-soldiers', function () {
-        let $fragment = $(document.createDocumentFragment());
-        let $selectedSoldiersFromShop = $('.ui-selected');
-        let len = $selectedSoldiersFromShop.length;
-        let armyToTransfer = [];
-        let sum = 0;
-        for (let i = 0; i < len; i += 1) {
-            let dataType = $selectedSoldiersFromShop[i].attributes['data-type'];
-            let soldierType = $(dataType).val();
-            let soldier = generateSoldier.createSoldierByType(soldierType);
-            let backgroundImageLink = soldier.image;
+        var $fragment = $(document.createDocumentFragment());
+        var $selectedSoldiersFromShop = $('.ui-selected');
+        var len = $selectedSoldiersFromShop.length;
+        var armyToTransfer = [];
+        var sum = 0;
+        for (var i = 0; i < len; i += 1) {
+            var dataType = $selectedSoldiersFromShop[i].attributes['data-type'];
+            var soldierType = $(dataType).val();
+            var soldier = createSoldierByType(soldierType);
+            var backgroundImageLink = soldier.image;
             armyToTransfer.push(soldier);
             sum += soldier.price;
             $('<li />')
@@ -137,28 +132,39 @@ function loadShop(forUser) {
 
         }
 
-        if (forUser.army.length + armyToTransfer.length > constants.MAX_ARMY_LENGTH) {
+        if (forUser.get("army").length > constants.MAX_ARMY_LENGTH) {
         	showError(`Your army can be with length ${constants.MAX_ARMY_LENGTH}!`);
         } else
-        if (forUser.army.length >= constants.MAX_ARMY_LENGTH) {
+        if (forUser.get("level").length >= constants.MAX_ARMY_LENGTH) {
             showError(`Your army is full! Max soldiers ${constants.MAX_ARMY_LENGTH}`);
-        } else if (sum > forUser.money) {
-            showError(`Not enough money! Need more $ + ${sum - forUser.money}.`);
+        } else if (sum > forUser.get("money")) {
+            showError(`Not enough money! Need more $ + ${sum - forUser.get("money")}.`);
         } else {
             $('#player-army').append($fragment);
             $('#start-battle').prop('disabled', false);
-            forUser.money -= sum;
+            forUser.set("money", forUser.get("money") - sum);
             armyToTransfer.forEach(function(item) {
-                    forUser.army.push(item);
+                    //var updatedArmy =  forUser.get("army").push(item);
+                    //forUser.set("army", updatedArmy);
+                    var army = forUser.get("army");
+                    army.push(item);
+                    console.log(army);
             });
-            $('div#container-army p').html('YOUR ARMY ' + forUser.army.length);
-            $('#money td:last-of-type').html('$' + forUser.money);
+            $('div#container-army p').html('YOUR ARMY ' + forUser.get("army").length);
+            $('#money td:last-of-type').html('$' + forUser.get("money"));
         }
+        
+        forUser.save()
+            .then(function(){
+                
+            }, function(err){
+                console.log("Error:" + JSON.stringify(err));
+            });
 
     });
 
     function hasSelectedSoldier() {
-        let collection = $('main#shop table').find('.ui-selected');
+        var collection = $('main#shop table').find('.ui-selected');
         if (collection.length) {
             return true;
         }
@@ -166,7 +172,7 @@ function loadShop(forUser) {
     }
 
     function showError(errMessage) {
-        let error = $('<p>' + errMessage + ' </p>');
+        var error = $('<p>' + errMessage + ' </p>');
         error.addClass('error-message')
             .insertAfter('#buy-soldiers')
             .fadeIn(500)
@@ -175,8 +181,4 @@ function loadShop(forUser) {
                 $(this).remove();
             });
     }
-}
-
-export default {
-    loadShop
 }

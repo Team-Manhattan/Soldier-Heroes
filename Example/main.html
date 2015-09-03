@@ -185,50 +185,6 @@
             }
         });
     }
-    
-    Parse.initialize("TXxXJyZcN2FgRpdrRh5j8AiIqnlOOD7BSh700Ayf", "IJpaeoVtPgcStCdFyMsybAnLN1zdAL7YhgzdEJlu");
-    
-    var loginButton = document.getElementById('login'),
-        registerButton = document.getElementById('register');
-    
-    loginButton.addEventListener('click', function(ev){
-        var userName = document.getElementById('username').value,
-            password = document.getElementById('pass').value,
-            form = document.getElementById('form');
-            
-            
-        Parse.User.logIn(userName, password)
-            .then(function(){
-                alert("User logged in successfully.");
-                form.parentNode.removeChild(form);
-            }, function(err){
-                alert("Invalid username and password combination");
-            });
-        console.log(userName,password);
-    }, false);
-    
-    registerButton.addEventListener('click', function(ev){
-        var userName = document.getElementById('username').value,
-            password = document.getElementById('pass').value,
-            form = document.getElementById('form');
-            
-        Parse.User.signUp(userName, password)
-            .then(function(){
-                var user = Parse.User.current();
-                    
-                user.set("army", []);
-                user.set("level", 1);
-                user.set("exp", 0);
-                user.set("money", 1000);
-                user.save();
-                
-                alert('User created successfully');
-                form.parentNode.removeChild(form);
-            }, function(err){
-                alert("Error: " + JSON.stringify(err));
-            });
-    }, false)
-    
 </script>
 </body>
 </html>

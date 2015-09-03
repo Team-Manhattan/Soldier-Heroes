@@ -1,17 +1,12 @@
-import $ from 'jquery';
-import player from '../Libraries/player.js';
-import info from './loadUserInfo.js';
-import shop from './shop.js';
-
 function log() {
     "use strict";
 
     $('body').html('');
 
-    let width = window.innerWidth - 0;
-    let height = window.innerHeight - 0;
-    let $div = $('<div/>');
-    let $form = $('<form />');
+    var width = window.innerWidth - 0;
+    var height = window.innerHeight - 0;
+    var $div = $('<div/>');
+    var $form = $('<form />');
     // $div.attr('id', 'login-form');
     $div.attr('class', 'container');
     $form.attr('class', 'form-signin');
@@ -30,13 +25,7 @@ function log() {
     $form.appendTo($div);
     $div.appendTo('body');
 
-    $('#login').on('click', function () {
-        /*TODO:CHECK IN users db for existence of this user*/
-        /*TODO:CHECK if the password matches*/
-        /*TODO:Create object "player" with properties form gb data: money, exp, level, army etc.*/
-        /*TODO:save id of the user in "localStarage" - it is special number six different digits*/
-        /*TODO:Then Load on the shop menu*/
-    });
+    
 
     $('#forReg').on('click', function () {
         $(this).css('display', 'none');
@@ -53,10 +42,18 @@ function log() {
         $('#register').css('display', 'none');
         $('div.container h2').html('Login');
     });
+    
+    $('#login').on('click', function () {
+        /*TODO:CHECK IN users db for existence of this user*/
+        /*TODO:CHECK if the password matches*/
+        /*TODO:Create object "player" with properties form gb data: money, exp, level, army etc.*/
+        /*TODO:save id of the user in "localStarage" - it is special number six different digits*/
+        /*TODO:Then Load on the shop menu*/
+    });
 
     $('#register').on('click', function () {
-        let username = $('#username').val();
-        let password = $('#password').val();
+        var username = $('#username').val();
+        var password = $('#password').val();
 
 
         if (/\s+/.test(username) || /\s+/.test(password) || username === '' || password === '') {
@@ -66,14 +63,10 @@ function log() {
         }
 
         /*register new player in mongodb*/
-        let mod = player.getPlayer();
-        let pla = mod.createPlayer(username, password, 1, 1, 2000, new Date(), []);
+        var mod = player.getPlayer();
+        var pla = mod.createPlayer(username, password, 1, 1, 2000, new Date(), []);
         window.localStorage.setItem('loggedUser', pla.id);
         info.showLoggedUserInfo(pla);
         shop.loadShop(pla);
     });
-}
-
-export default {
-    log
 }

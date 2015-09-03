@@ -1,7 +1,7 @@
-var singleSoldier = (function(){
+var barrack = (function(){
         "use strict";
-     let soldier = (function () {
-        let soldier = Object.create({});
+     var soldier = (function () {
+        var soldier = Object.create({});
 
         Object.defineProperties(soldier, {
             newSoldier: {
@@ -108,7 +108,3 @@ var singleSoldier = (function(){
     };
 
 }());
-
-export default {
-    singleSoldier: singleSoldier
-}
