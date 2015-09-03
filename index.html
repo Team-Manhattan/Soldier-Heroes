@@ -21,7 +21,7 @@
     <script src="Modules/loadUserInfo.js"></script>
     <script src="Soldiers/createSoldierOfType.js"></script>
     <script src="Soldiers/soldier.js"></script>
-    
+    <script src="Modules/shop.js"></script>
     
     <script>
         System.import('Libraries/bootstrap/css/bootstrap.min.css!');
@@ -31,12 +31,11 @@
     </script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript">
-    Parse.initialize("TXxXJyZcN2FgRpdrRh5j8AiIqnlOOD7BSh700Ayf", "IJpaeoVtPgcStCdFyMsybAnLN1zdAL7YhgzdEJlu");
-    
-    Parse.User.logOut();
-    console.log(Parse.User.current());
+        Parse.initialize("TXxXJyZcN2FgRpdrRh5j8AiIqnlOOD7BSh700Ayf", "IJpaeoVtPgcStCdFyMsybAnLN1zdAL7YhgzdEJlu");
         "use strict";
-    
+        
+        
+        
         function generateLoginForm(){
             $('body').html('');
         
@@ -130,10 +129,18 @@
                     });
             }, false);
         }
+        if(localStorage.getItem("loggedUser")){
+            var user = Parse.User.current();
+            
+            showLoggedUserInfo(user);
+            loadShop(user);
+        }
+        else {
+            generateLoginForm();
+        }
         
-    generateLoginForm();
     </script>
-    <script src="Modules/shop.js"></script>
+    
     
 </body>
 </html>
