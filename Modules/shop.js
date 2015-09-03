@@ -3,6 +3,7 @@ function loadShop(forUser) {
     "use strict";
     var $table = $('<table cellspacing="0" cellpadding="0"/>');
     var $divPlayerArmy = $('<div />');
+    var $divEnemyArmy = $('<div />');
     var $row = $('<tr />');
     var lockedPath = 'Images/locked.png';
     var soldiersInShop = [
@@ -72,7 +73,21 @@ function loadShop(forUser) {
         .append($('<p />').html('Your army'))
         .append($('<ul />').attr('id', 'player-army'))
         .append($('<input id="start-battle" type="button" value="START" />'));
-        
+
+    $divEnemyArmy
+        .attr('id', 'container-enemy')
+        .append($('<p />').html('Enemy army'))
+        .append($('<ul />').attr('id', 'enemy-army'));
+
+    $('<main id="shop" />')
+        .css('right', '100px')
+        .css('top', '150px')
+        .append($table)
+        .append($('<input id="buy-soldiers" type="button" value="BUY" />').prop('disabled', true))
+        .append($divPlayerArmy)
+        .append($divEnemyArmy)
+        .appendTo('body');
+
     $("body").on("click", "#start-battle", function(){
         var enemyArmy = AI.generateEnemyArmy(Parse.User.current()),
             userArmy = Parse.User.current().get("army");
@@ -107,14 +122,6 @@ function loadShop(forUser) {
             console.log("user lost")
         }
     });
-
-    $('<main id="shop" />')
-        .css('right', '100px')
-        .css('top', '150px')
-        .append($table)
-        .append($('<input id="buy-soldiers" type="button" value="BUY" />').prop('disabled', true))
-        .append($divPlayerArmy)
-        .appendTo('body');
 
     if (forUser.get("army").length) {
         console.log(forUser.get("army"));

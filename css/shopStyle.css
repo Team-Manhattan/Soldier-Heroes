@@ -93,7 +93,7 @@ body main#shop p.error-message {
     color: red;
 }
 
-body main#shop div#container-army {
+body main#shop div#container-army, div#container-enemy {
     position: absolute;
     left: -190px;
     top: 0;
@@ -102,7 +102,7 @@ body main#shop div#container-army {
     width: 170px;
 }
 
-body main#shop div#container-army p {
+body main#shop div#container-army p, div#container-enemy p {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #008000;
@@ -113,7 +113,7 @@ body main#shop div#container-army p {
     text-transform: uppercase;
 }
 
-body main#shop div#container-army ul {
+body main#shop div#container-army ul, div#container-enemy ul {
     background-color: rgba(162, 145, 63, 0.4);
     border: 1px solid #008000;
     overflow: auto;
@@ -121,7 +121,7 @@ body main#shop div#container-army ul {
     padding: 5px;
 }
 
-body main#shop div#container-army ul li {
+body main#shop div#container-army ul li, div#container-enemy ul li{
     display: block;
     height: 80px;
 }
@@ -132,18 +132,30 @@ body main#shop div#container-army ul li.ui-state-highlight {
     border: 3px solid rgb(28, 128, 6);
 }
 
-body main#shop div#container-army ul li img {
+body main#shop div#container-army ul li img, div#container-enemy ul li img {
     width: 70px;
     height: 80px;
 }
 
-body main#shop div#container-army ul li span {
+body main#shop div#container-army ul li span, div#container-enemy ul li span {
     margin: 0 20px;
     font-weight: bold;
     font-size: 20px;
     text-shadow: 1px 1px 2px #1BE81B;
 }
 
-body main#shop div#container-army ul li span.zero {
+body main#shop div#container-army ul li span.zero, div#container-enemy ul li span.zero {
     text-shadow: 1px 1px 2px #EC0000;
+}
+
+body main#shop div#container-enemy {
+    left: -500px;
+}
+
+body main#shop div#container-enemy p {
+    background-color: #c60a17;
+}
+
+body main#shop div#container-enemy ul {
+    border: 1px solid #c60a17;
 }
