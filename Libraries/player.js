@@ -1,9 +1,10 @@
+/*globals constants, validator*/
 function generateId() {
     "use strict";
     var id = '';
 
     for (var i = 0, constraint = constants.LENGTH_OF_ID; i < constraint; i += 1) {
-        id += ((Math.random() * 9) | 0)+ '';
+        id += ((Math.random() * 9) | 0) + '';
     }
 
     return id;
@@ -130,8 +131,8 @@ var getPlayer = (function getPlayer() {
             return player;
         }());
         return {
-            createPlayer: function (name, pass,level, exp, money,regDay, army) {
-                return Object.create(player).newPlayer(name, pass,level, exp, money,regDay, army);
+            createPlayer: function (name, pass, level, exp, money, regDay, army) {
+                return Object.create(player).newPlayer(name, pass, level, exp, money, regDay, army);
             }
         };
     }());

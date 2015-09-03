@@ -118,14 +118,11 @@ body main#shop div#container-army ul {
     border: 1px solid #008000;
     overflow: auto;
     height: 271px;
-    padding: 5px 50px;
+    padding: 5px;
 }
 
 body main#shop div#container-army ul li {
-    background: no-repeat;
-    background-size: 70px 70px;
     display: block;
-    width: 70px;
     height: 80px;
 }
 
@@ -133,4 +130,20 @@ body main#shop div#container-army ul li.ui-state-highlight {
     background-color: rgba(121, 234, 88, 0.4);
     border-radius: 5px;
     border: 3px solid rgb(28, 128, 6);
+}
+
+body main#shop div#container-army ul li img {
+    width: 70px;
+    height: 80px;
+}
+
+body main#shop div#container-army ul li span {
+    margin: 0 20px;
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 1px 1px 2px #1BE81B;
+}
+
+body main#shop div#container-army ul li span.zero {
+    text-shadow: 1px 1px 2px #EC0000;
 }
