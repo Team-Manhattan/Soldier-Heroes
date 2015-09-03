@@ -14,7 +14,7 @@ function createSoldierByType(type) {
             requiredLvl = 1;
             price = 50;
             damage = 20;
-            defence = 20;
+            defence = 5;
             health = 100;
             accuracy = 20;
             break;
@@ -32,7 +32,7 @@ function createSoldierByType(type) {
             requiredLvl = 1;
             price = 150;
             damage = 40;
-            defence = 25;
+            defence = 15;
             health = 120;
             accuracy = 32;
             break;

@@ -71,6 +71,41 @@ function loadShop(forUser) {
         .append($('<p />').html('Your army'))
         .append($('<ul />').attr('id', 'player-army'))
         .append($('<input id="start-battle" type="button" value="START" />').prop('disabled', true));
+        
+    $("body").on("click", "#start-battle", function(){
+        var enemyArmy = AI.generateEnemyArmy(Parse.User.current()),
+            userArmy = Parse.User.current().get("army");
+        
+        while(userArmy.length > 0 && enemyArmy.length > 0){
+            // Pistols
+			battleHandler.attackWithUserPistols(userArmy, enemyArmy);
+            battleHandler.attackWithUserPistols(enemyArmy, userArmy);
+            
+            // AssaultRifles
+            battleHandler.attackWithUserAssaultRifles(userArmy, enemyArmy);
+            battleHandler.attackWithUserAssaultRifles(enemyArmy, userArmy);
+            
+            // Snipers
+            battleHandler.attackWithUserSnipers(userArmy, enemyArmy);
+            battleHandler.attackWithUserSnipers(enemyArmy, userArmy);
+            
+            // Medics
+            battleHandler.healWithUserMedics(userArmy);
+            battleHandler.healWithUserMedics(userArmy);
+           
+            userArmy = battleHandler.removeDeadSoldiers(userArmy);
+            enemyArmy = battleHandler.removeDeadSoldiers(enemyArmy);
+		}
+        
+        Parse.User.current().set("army", userArmy);
+        
+        if(enemyArmy.length == 0){
+            console.log("user won")
+        }
+        else {
+            console.log("user lost")
+        }
+    });
 
     $('<main id="shop" />')
         .css('right', '100px')
