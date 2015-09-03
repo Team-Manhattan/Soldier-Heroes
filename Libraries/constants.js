@@ -1,6 +1,5 @@
 var constants = (function(){
     return {
-        MAX_ARMY_LENGTH: 8,
         LENGTH_OF_ID: 6,
         LENGTH_SHOP_ITEMS: 12,
         MIN_NAME_LENGTH: 3,
