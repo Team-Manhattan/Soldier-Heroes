@@ -1,3 +1,4 @@
+/*globals $ */
 function loadShop(forUser) {
     "use strict";
     var $table = $('<table cellspacing="0" cellpadding="0"/>');
@@ -80,6 +81,10 @@ function loadShop(forUser) {
         .append($divPlayerArmy)
         .appendTo('body');
 
+    if (forUser.get("army").length) {
+        loadArmy(forUser.get("army"));
+    }
+
     $('body').on('mouseover', '#shop img.open', function () {
         var parent = $(this).parent();
         parent.find('div.hide')
@@ -129,13 +134,11 @@ function loadShop(forUser) {
                 .addClass('ui-state-default')
                 .css('background-image', 'url("../' + backgroundImageLink + '")')
                 .appendTo($fragment);
-
         }
 
         if (forUser.get("army").length > constants.MAX_ARMY_LENGTH) {
         	showError(`Your army can be with length ${constants.MAX_ARMY_LENGTH}!`);
-        } else
-        if (forUser.get("level").length >= constants.MAX_ARMY_LENGTH) {
+        } else if (forUser.get("level").length >= constants.MAX_ARMY_LENGTH) {
             showError(`Your army is full! Max soldiers ${constants.MAX_ARMY_LENGTH}`);
         } else if (sum > forUser.get("money")) {
             showError(`Not enough money! Need more $ + ${sum - forUser.get("money")}.`);
@@ -171,13 +174,27 @@ function loadShop(forUser) {
         return false;
     }
 
+    function loadArmy(soldiers) {
+        var i,
+            len = soldiers.length,
+            $fragment = $(document.createDocumentFragment());
+
+        for (i = 0; i < len; i += 1) {
+            $('<li />')
+                .addClass('ui-state-default')
+                .css('background-image', 'url("../' + soldiers[i]._image + '")')
+                .appendTo($fragment);
+        }
+        $('#player-army').append($fragment);
+    }
+
     function showError(errMessage) {
         var error = $('<p>' + errMessage + ' </p>');
         error.addClass('error-message')
             .insertAfter('#buy-soldiers')
             .fadeIn(500)
             .fadeOut(2000, function () {
-                console.log(this);
+                //console.log(this);
                 $(this).remove();
             });
     }
