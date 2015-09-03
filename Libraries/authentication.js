@@ -74,12 +74,19 @@ function generateLoginForm(){
 		Parse.User.signUp(userName, password)
 			.then(function(){
 				var user = Parse.User.current();
-					
-				user.set("army", []);
-				user.set("level", 1);
-				user.set("exp", 0);
-				user.set("money", 1000);
-				user.set("name", userName);
+				var theNewPlayer = getPlayer.createPlayer(userName,
+					password,
+					constants.DEFAULT_LEVEL,
+					constants.DEFAULT_EXP,
+					constants.DEFAULT_MONEY,
+					new Date(),
+					constants.DEFAULT_ARMY);
+
+				user.set("army", theNewPlayer.army);
+				user.set("level", theNewPlayer.level);
+				user.set("exp", theNewPlayer.exp);
+				user.set("money", theNewPlayer.money);
+				user.set("name", theNewPlayer.namePl);
 				user.save();
 				
 				window.localStorage.setItem('loggedUser', user.id);

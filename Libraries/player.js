@@ -91,7 +91,7 @@ var getPlayer = (function getPlayer() {
                     },
                     set: function (value) {
                         validator.isAllDigits(value);
-                        validator.positiveNumber(value);
+                        validator.correctMoney(value);
                         this._expiriance = value;
                     }
                 },

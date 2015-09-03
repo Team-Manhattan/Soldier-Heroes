@@ -91,6 +91,9 @@ function loadShop(forUser) {
     $("body").on("click", "#start-battle", function(){
         var enemyArmy = AI.generateEnemyArmy(Parse.User.current()),
             userArmy = Parse.User.current().get("army");
+
+        loadArmy(enemyArmy, '#enemy-army');
+        loadArmy(userArmy, '#player-army');
         
         while(userArmy.length > 0 && enemyArmy.length > 0){
             // Pistols
@@ -125,7 +128,7 @@ function loadShop(forUser) {
 
     if (forUser.get("army").length) {
         console.log(forUser.get("army"));
-        loadArmy(forUser.get("army"));
+        loadArmy(forUser.get("army"), '#player-army');
     }
 
     $('body').on('mouseover', '#shop img.open', function () {
@@ -194,7 +197,7 @@ function loadShop(forUser) {
             });
             $('div#container-army p').html('YOUR ARMY');
             $('#money td:last-of-type').html('$' + forUser.get("money"));
-            loadArmy(forUser.get("army"));
+            loadArmy(forUser.get("army"), '#player-army');
         }
 
         forUser.save()
@@ -214,7 +217,7 @@ function loadShop(forUser) {
         return false;
     }
 
-    function loadArmy(soldiers) {
+    function loadArmy(soldiers, idElementToLoad) {
         $('#player-army').html('');
         var len = soldiers.length,
             $fragment = $(document.createDocumentFragment()),
@@ -274,7 +277,7 @@ function loadShop(forUser) {
             $li.appendTo($fragment);
         }
 
-        $('#player-army').append($fragment);
+        $(idElementToLoad).append($fragment);
     }
 
     function showError(errMessage) {
