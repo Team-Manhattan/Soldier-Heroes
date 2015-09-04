@@ -7,7 +7,7 @@ function generateLoginForm(){
 	var $div = $('<div/>');
 	var $form = $('<form />');
 	// $div.attr('id', 'login-form');
-	$div.attr('class', 'container');
+	$div.attr('class', 'container col-md-12');
 	$form.attr('class', 'form-signin');
 
 	// $('<div class="container"/>');
