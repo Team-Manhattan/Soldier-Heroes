@@ -1,7 +1,7 @@
 var constants = (function(){
     return {
         DEFAULT_LEVEL:1,
-        DEFAULT_MONEY: 1000,
+        DEFAULT_MONEY: 3500,
         DEFAULT_EXP:0,
         DEFAULT_ARMY: [],
         LENGTH_OF_ID: 6,

@@ -1,11 +1,11 @@
-var AI = (function(){
-	var AI = Object.create({});
+var reward = (function(){
+	var reward = Object.create({});
 	
-	Object.defineProperty(AI, "generateEnemyArmy", {
-		value: function(currentUser){
-			var currentArmy = [],
-				armyLength = currentUser.get("level") * currentUser.get("level") * 5;
-				
+	Object.defineProperty(reward, "awardWithArmy", {
+		value: function(user){
+			var armyLength = utils.generateNumberBetween(10, (user.get("level") + 1) * 10),
+				currentArmy = [];
+			
 			for(var i = 0; i < armyLength; i+=1) {
 				var randomNumber = utils.generateNumberBetween(1, 4);
 				if(randomNumber%(i+1) == 0){
@@ -21,10 +21,20 @@ var AI = (function(){
 					currentArmy.push(createSoldierByType(constants.sniper));
 				}
 			}
-			
+						
 			return currentArmy;
 		}
 	});
 	
-	return AI;
+	Object.defineProperty(reward, "awardWithGold", {
+		value: function(user){
+			
+						
+			return currentArmy;
+		}
+	});
+	
+	
+	
+	return reward;
 })();

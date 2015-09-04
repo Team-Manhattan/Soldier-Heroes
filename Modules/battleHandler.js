@@ -21,7 +21,7 @@ var battleHandler = (function(){
 					var randomNumber = utils.generateNumberBetween(0, enemyArmy.length - 1),
 						enemySoldier = enemyArmy[randomNumber],
 						dmgDone = soldier.damage - (soldier.accuracy / 10) - enemySoldier.defence;
-					enemySoldier.hitPoints -= dmgDone > 0 ? dmgDone : 3;
+					enemySoldier.hitPoints -= dmgDone > 0 ? dmgDone : 5;
 				}
 			}
 		)
@@ -45,7 +45,7 @@ var battleHandler = (function(){
 			userArmy.forEach(function(soldier){
 				if(soldier._type == constants.medic){
 					userArmy.forEach(function(soldierToHeal){
-						soldierToHeal.hitPoints += 2;
+						soldierToHeal.hitPoints += 0.5;
 					})
 				}
 			}
@@ -62,6 +62,36 @@ var battleHandler = (function(){
 			}
 			
 			return army;
+		}
+	});
+	
+	Object.defineProperty(battleHandler, "awardUser", {
+		value: function(user){
+			var award = {
+				exp: Math.floor(user.get("level") * utils.generateNumberBetween(1, user.get("level")+4) * 5),
+				money: Math.floor(user.get("level") * utils.generateNumberBetween(5,50))
+			}
+			
+			user.set("exp", user.get("exp") + award.exp);
+			user.set("money", user.get("money") + award.money);
+			user.save();
+			
+			return award;
+		}
+	});
+	
+	Object.defineProperty(battleHandler, "punishUser", {
+		value: function(user){
+			var award = {
+				exp: Math.floor(user.get("level") * utils.generateNumberBetween(1, user.get("level"))),
+				money: Math.floor(user.get("level") * 2)
+			}
+			
+			user.set("exp", user.get("exp") - award.exp);
+			user.set("money", user.get("money") - award.money);
+			user.save();
+			
+			return award;
 		}
 	});
 	

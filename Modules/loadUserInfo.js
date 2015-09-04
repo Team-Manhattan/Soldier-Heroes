@@ -7,20 +7,19 @@ function showLoggedUserInfo(forUser) {
     $row.attr('id','userName');
     $table.append($row.clone());
     $row.html('');
-    $('<td >Level:</td><td>' + forUser.get("level") + '</td>').appendTo($row);
+    $('<td >Level:</td><td id="levelValue">' + forUser.get("level") + '</td>').appendTo($row);
     $row.attr('id','lvl');
     $table.append($row.clone());
     $row.html('');
-    $('<td >Money:</td><td>$' + forUser.get("money") + '</td>').appendTo($row);
+    $('<td >Money:</td><td id="moneyValue">$' + forUser.get("money") + '</td>').appendTo($row);
     $row.attr('id','money');
     $table.append($row.clone());
     $row.html('');
-    $('<td >Exp:</td><td>' + forUser.get("exp") + '</td>').appendTo($row);
+    $('<td >Exp:</td><td id="expValue">' + forUser.get("exp") + '</td>').appendTo($row);
     $row.attr('id','exp');
     $table.append($row.clone());
     $row.html('');
-
-
+    
     $('<header id="logged-user-info"/>').append($('<div/>').append($table)).appendTo('body');
     $('<input type="button" id="sign-out" value="Sign out">').appendTo('#logged-user-info div');
 
@@ -34,4 +33,10 @@ function showLoggedUserInfo(forUser) {
     return {
         showLoggedUserInfo: showLoggedUserInfo
     }
+}
+
+function updateUserInfo(forUser){
+    $("#levelValue").text(forUser.get("level"));
+    $("#moneyValue").text(forUser.get("money"));
+    $("#expValue").text(forUser.get("exp"));
 }

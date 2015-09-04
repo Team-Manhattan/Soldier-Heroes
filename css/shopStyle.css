@@ -140,7 +140,7 @@ body main#shop div#container-army ul li img, div#container-enemy ul li img {
 body main#shop div#container-army ul li span, div#container-enemy ul li span {
     margin: 0 20px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
     text-shadow: 1px 1px 2px #1BE81B;
 }
 
@@ -149,7 +149,7 @@ body main#shop div#container-army ul li span.zero, div#container-enemy ul li spa
 }
 
 body main#shop div#container-enemy {
-    left: -500px;
+    left: -800px;
 }
 
 body main#shop div#container-enemy p {

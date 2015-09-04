@@ -88,46 +88,7 @@ function loadShop(forUser) {
         .append($divEnemyArmy)
         .appendTo('body');
 
-    $("body").on("click", "#start-battle", function(){
-        var enemyArmy = AI.generateEnemyArmy(Parse.User.current()),
-            userArmy = Parse.User.current().get("army");
-
-        loadArmy(enemyArmy, '#enemy-army');
-        loadArmy(userArmy, '#player-army');
-        
-        while(userArmy.length > 0 && enemyArmy.length > 0){
-            // Pistols
-			battleHandler.attackWithUserPistols(userArmy, enemyArmy);
-            battleHandler.attackWithUserPistols(enemyArmy, userArmy);
-            
-            // AssaultRifles
-            battleHandler.attackWithUserAssaultRifles(userArmy, enemyArmy);
-            battleHandler.attackWithUserAssaultRifles(enemyArmy, userArmy);
-            
-            // Snipers
-            battleHandler.attackWithUserSnipers(userArmy, enemyArmy);
-            battleHandler.attackWithUserSnipers(enemyArmy, userArmy);
-            
-            // Medics
-            battleHandler.healWithUserMedics(userArmy);
-            battleHandler.healWithUserMedics(userArmy);
-           
-            userArmy = battleHandler.removeDeadSoldiers(userArmy);
-            enemyArmy = battleHandler.removeDeadSoldiers(enemyArmy);
-		}
-        
-        Parse.User.current().set("army", userArmy);
-        
-        if(enemyArmy.length == 0){
-            console.log("user won")
-        }
-        else {
-            console.log("user lost")
-        }
-    });
-
     if (forUser.get("army").length) {
-        console.log(forUser.get("army"));
         loadArmy(forUser.get("army"), '#player-army');
     }
 
@@ -193,19 +154,19 @@ function loadShop(forUser) {
                 //forUser.set("army", updatedArmy);
                 var army = forUser.get("army");
                 army.push(item);
-                console.log(army);
             });
             $('div#container-army p').html('YOUR ARMY');
             $('#money td:last-of-type').html('$' + forUser.get("money"));
-            loadArmy(forUser.get("army"), '#player-army');
-        }
-
-        forUser.save()
+            forUser.save()
             .then(function () {
 
             }, function (err) {
                 console.log("Error:" + JSON.stringify(err));
             });
+            loadArmy(forUser.get("army"), '#player-army');
+        }
+
+        
 
     });
 
@@ -216,70 +177,7 @@ function loadShop(forUser) {
         }
         return false;
     }
-
-    function loadArmy(soldiers, idElementToLoad) {
-        $('#player-army').html('');
-        var len = soldiers.length,
-            $fragment = $(document.createDocumentFragment()),
-            medicsCount = 0,
-            pistolsCount = 0,
-            assaultsCount = 0,
-            snipersCount = 0,
-            grenadiersCount = 0,
-            types = [
-                createSoldierByType(constants.medic),
-                createSoldierByType(constants.pistol),
-                createSoldierByType(constants.assaultRifle),
-                createSoldierByType(constants.sniper),
-                createSoldierByType(constants.grenadier)],
-            lenTypes = types.length,
-            typesCount = [],
-            i,
-            j;
-
-        for (i = 0; i < len; i += 1) {
-            switch (soldiers[i]._type) {
-                case constants.medic:
-                    medicsCount += 1;
-                    break;
-                case constants.pistol:
-                    pistolsCount += 1;
-                    break;
-                case constants.assaultRifle:
-                    assaultsCount += 1;
-                    break;
-                case constants.sniper:
-                    snipersCount += 1;
-                    break;
-                case constants.grenadier:
-                    grenadiersCount += 1;
-                    break;
-                default:
-                    console.log('******No such Type****');
-            }
-        }
-
-        typesCount = [medicsCount, pistolsCount, assaultsCount, snipersCount, grenadiersCount];
-
-        for (j = 0; j < lenTypes; j += 1) {
-            var $li = $('<li />')
-                .addClass('ui-state-default')
-                .append($('<img />').attr('src', types[j].image));
-            var $span = $('<span />');
-
-            if (!typesCount[j]) {
-                $span.addClass('zero');
-            }
-
-            $span.html(typesCount[j])
-                .appendTo($li);
-
-            $li.appendTo($fragment);
-        }
-
-        $(idElementToLoad).append($fragment);
-    }
-
+    
     function showError(errMessage) {
         var error = $('<p>' + errMessage + ' </p>');
         error.addClass('error-message')
@@ -290,4 +188,68 @@ function loadShop(forUser) {
                 $(this).remove();
             });
     }
+}
+
+function loadArmy(soldiers, idElementToLoad) {
+    $(idElementToLoad).empty();
+    $('#player-army').html('');
+    var len = soldiers.length,
+        $fragment = $(document.createDocumentFragment()),
+        medicsCount = 0,
+        pistolsCount = 0,
+        assaultsCount = 0,
+        snipersCount = 0,
+        grenadiersCount = 0,
+        types = [
+            createSoldierByType(constants.medic),
+            createSoldierByType(constants.pistol),
+            createSoldierByType(constants.assaultRifle),
+            createSoldierByType(constants.sniper),
+            createSoldierByType(constants.grenadier)],
+        lenTypes = types.length,
+        typesCount = [],
+        i,
+        j;
+
+    for (i = 0; i < len; i += 1) {
+        switch (soldiers[i]._type) {
+            case constants.medic:
+                medicsCount += 1;
+                break;
+            case constants.pistol:
+                pistolsCount += 1;
+                break;
+            case constants.assaultRifle:
+                assaultsCount += 1;
+                break;
+            case constants.sniper:
+                snipersCount += 1;
+                break;
+            case constants.grenadier:
+                grenadiersCount += 1;
+                break;
+            default:
+                console.log('******No such Type****');
+        }
+    }
+
+    typesCount = [medicsCount, pistolsCount, assaultsCount, snipersCount, grenadiersCount];
+
+    for (j = 0; j < lenTypes; j += 1) {
+        var $li = $('<li />')
+            .addClass('ui-state-default')
+            .append($('<img />').attr('src', types[j].image));
+        var $span = $('<span />');
+
+        if (!typesCount[j]) {
+            $span.addClass('zero');
+        }
+
+        $span.html(typesCount[j])
+            .appendTo($li);
+
+        $li.appendTo($fragment);
+    }
+
+    $(idElementToLoad).append($fragment);
 }
