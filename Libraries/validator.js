@@ -49,7 +49,7 @@ var validator = (function(){
             "use strict";
             for (var i = 0, len = value.length; i < len; i += 1) {
                 if (isNaN(value[i])) {
-                    throw new Error(errorMessages.notANumber);
+                    throw new Error("The value is not a digit!");
                 }
     
                 /*if (!(patternDigits.test(value[i]))) {
@@ -57,14 +57,18 @@ var validator = (function(){
                     throw new Error(errorMessages.notANumber);
                 }*/
             }
+            
+            return true;
         },
     
         positiveNumber: function (value) {
             "use strict";
             /*value - 0 = Number, not a string!*/
             if ((value - 0) <= 0) {
-                throw new Error(errorMessages.zeroLevel);
+                throw new Error("Level can't be zero!");
             }
+            
+            return true;
         },
     
         correctMoney: function (value) {

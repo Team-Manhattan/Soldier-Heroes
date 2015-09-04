@@ -22,3 +22,20 @@ describe("Utils", function(){
 		expect(incorrectNumber).to.throw();
 	});
 });
+describe("Validator", function(){
+	it("Expect isAllDigits(5125128) to return true", function(){
+		var actual = validator.isAllDigits(5125128);
+		expect(actual).to.be.true;
+	});
+	it("Expect isAllDigits('421a5') to throw", function(){
+		var actual = function(){
+			utils.isAllDigits("421a5");
+		};
+		
+		expect(actual).to.throw();
+	});
+	it("Expect positiveNumber('1') to return true", function(){
+		var actual = validator.positiveNumber('1');
+		expect(actual).to.be.true;
+	})
+});
