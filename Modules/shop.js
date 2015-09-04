@@ -5,6 +5,7 @@ function loadShop(forUser) {
     var $divPlayerArmy = $('<div />');
     var $divEnemyArmy = $('<div />');
     var $row = $('<tr />');
+    var $treasure = $('<button />').html("Treasure").attr('id', 'treasure');
     var lockedPath = 'Images/locked.png';
     var soldiersInShop = [
         createSoldierByType(constants.medic),
@@ -123,6 +124,15 @@ function loadShop(forUser) {
             placeholder: "ui-state-highlight"
         })
         .disableSelection();
+        
+    $('body').append($treasure);
+    
+    $('body').on('click', '#treasure', function(ev){
+       var moneyRewarded = reward.awardWithGold(Parse.User.current()); 
+       alert("Bounty from treasure: " + moneyRewarded + " gold");
+       $(ev.target).attr('disabled', 'disabled');
+       $(ev.target).css("background-color", "gray");
+    });
 
     $('body').on('click', '#buy-soldiers', function () {
         var $fragment = $(document.createDocumentFragment());

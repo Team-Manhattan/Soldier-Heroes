@@ -28,9 +28,12 @@ var reward = (function(){
 	
 	Object.defineProperty(reward, "awardWithGold", {
 		value: function(user){
+			var rewardMoney = user.get("level") * 500;
+			user.set("money", user.get("money") + rewardMoney);
+			user.save();
+			updateUserInfo(user);
 			
-						
-			return currentArmy;
+			return rewardMoney;
 		}
 	});
 	
